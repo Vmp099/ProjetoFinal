@@ -2,6 +2,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         new App();
+        int opcao;
     }
 
     private App() {
@@ -43,4 +44,16 @@ public class App {
             System.out.println(escolhaCor);
         } while (escolhaCor != 'V' && escolhaCor != 'A');
     }
+
+    //Perguntar se o Jogador que jogar novamente
+ public void Usuariojogarnovamente(char resposta, Scanner sc) {   
+do {
+            System.out.println("Deseja jogar novamente? (S/N)");
+            resposta = sc.next().charAt(0);
+            resposta = Character.toUpperCase(resposta);
+        } while (resposta == 'S');
+        System.out.println("Obrigado por jogar!");
+    }
 }
+
+
