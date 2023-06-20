@@ -2,7 +2,6 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         new App();
-        int opcao;
     }
 
     private App() {
@@ -11,8 +10,6 @@ public class App {
         char[][] tabuleiro = new char[coluna][linha];
         char escolhaCor = 'B', corPc = 'B';
         char escolhaUsuario = 'B';
-
-        
         for (int l = 0; l < linha; l++) {
             for (int c = 0; c < coluna; c++) {
                 tabuleiro[c][l] = 'B';
