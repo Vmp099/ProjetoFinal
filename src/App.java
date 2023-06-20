@@ -9,6 +9,7 @@ public class App {
         final int linha = 6, coluna = 7;
         char[][] tabuleiro = new char[coluna][linha];
         char escolhaCor = 'B';
+        int posicaoEscolhida = 0;
         for (int l = 0; l < linha; l++) {
             for (int c = 0; c < coluna; c++) {
                 tabuleiro[c][l] = 'B';
@@ -17,6 +18,8 @@ public class App {
        char corUser = escolhaUsuario(escolhaCor, sc);
        char corPc   = escolhaPc(corUser);
        System.out.println("Cor Usuário: " + corUser + "\nCor Pc: " + corPc);
+        adicionaTabela(tabuleiro, corPc, corUser, posicaoEscolhida, sc);
+
 
         sc.close();
     }
@@ -24,6 +27,7 @@ public class App {
     public void mostraJogo(char[][] tabuleiro) {
         System.out.println("=============================");
         System.out.println("| 0 | 1 | 2 | 3 | 4 | 5 | 6 |");
+        System.out.println("=============================");
         for (int l = 0; l < 6; l++) {
             for (int c = 0; c < 7; c++) {
                 System.out.print("| " + tabuleiro[c][l] + " ");
@@ -57,14 +61,37 @@ public class App {
     }
 
     //Perguntar se o Jogador que jogar novamente
- public void usuarioJogarNovamente(char resposta, Scanner sc) {   
-do {
+    public void usuarioJogarNovamente(char resposta, Scanner sc) {   
+        do {
             System.out.println("Deseja jogar novamente? (S/N)");
             resposta = sc.next().charAt(0);
             resposta = Character.toUpperCase(resposta);
         } while (resposta == 'S');
         System.out.println("Obrigado por jogar!");
     }
+
+    public void adicionaTabela(char[][]tabuleiro, char corPc, char corUser,int posicaoEscolhida, Scanner sc){
+        int posicao = posicaoEscolhida;
+        do {
+            mostraJogo(tabuleiro);
+            System.out.println("Informe a coluna desejada: (0 a 6)");
+            posicao = sc.nextInt();
+        } while (posicao <= 0 && posicao >= 6);
+        
+        if(tabuleiro[posicao][0] == 'B'){
+            for (int i = 5; i >= 0; i--) {
+                if(tabuleiro[posicao][i] == 'B'){
+                    tabuleiro[posicao][i] = corUser;
+                    break;
+                } 
+            }
+        }else{
+            
+        }
+        
+        mostraJogo(tabuleiro);
+    }
+    
 }
 
 
