@@ -8,14 +8,15 @@ public class App {
         Scanner sc = new Scanner(System.in);
         final int linha = 6, coluna = 7;
         char[][] tabuleiro = new char[coluna][linha];
-        char escolhaCor = 'B', corPc = 'B';
-        char escolhaUsuario = 'B';
+        char escolhaCor = 'B';
         for (int l = 0; l < linha; l++) {
             for (int c = 0; c < coluna; c++) {
                 tabuleiro[c][l] = 'B';
             }
         }
-       escolhaUsuario(escolhaCor, sc);
+       char corUser = escolhaUsuario(escolhaCor, sc);
+       char corPc   = escolhaPc(corUser);
+       System.out.println("Cor Usuário: " + corUser + "\nCor Pc: " + corPc);
 
         sc.close();
     }
@@ -32,18 +33,31 @@ public class App {
         System.out.println("=============================");
     }
 
-    public void escolhaUsuario(char escolhaCor, Scanner sc) {
+    public char escolhaUsuario(char escolhaCor, Scanner sc) {
+        char escolhaUser = escolhaCor;
         do {
             System.out.println("Escolha uma cor V ou A: ");
-            escolhaCor = sc.next().charAt(0);
+            escolhaUser = sc.next().charAt(0);
             // Convertendo o caracter para maiúsculo
-            escolhaCor = Character.toUpperCase(escolhaCor);
-            System.out.println(escolhaCor);
-        } while (escolhaCor != 'V' && escolhaCor != 'A');
+            escolhaUser = Character.toUpperCase(escolhaUser);
+            System.out.println(escolhaUser);
+        } while (escolhaUser != 'V' && escolhaUser != 'A');
+        return escolhaUser;
+    }
+    public char escolhaPc(char escolhaUser){
+        char corPc = 'B';
+        if (escolhaUser == 'A') {
+        corPc = 'V';
+       }else if (escolhaUser == 'V') {
+        corPc = 'A';
+       }else{
+        corPc = 'B';
+       }
+       return corPc;
     }
 
     //Perguntar se o Jogador que jogar novamente
- public void Usuariojogarnovamente(char resposta, Scanner sc) {   
+ public void usuarioJogarNovamente(char resposta, Scanner sc) {   
 do {
             System.out.println("Deseja jogar novamente? (S/N)");
             resposta = sc.next().charAt(0);
