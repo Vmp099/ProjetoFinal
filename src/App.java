@@ -21,6 +21,21 @@ public class App {
        System.out.println("Cor Usuário: " + corUser + "\nCor Pc: " + corPc);
         adicionaTabela(tabuleiro, corPc, corUser, posicaoEscolhida, sc);
 
+         while (true) {
+            adicionaTabela(tabuleiro, corPc, corUser, posicaoEscolhida, sc);
+            if (verificaVitoria(tabuleiro, corUser)) {
+                System.out.println("Parabéns! Você venceu!");
+                break;
+            }
+            if (verificaVitoria(tabuleiro, corPc)) {
+                System.out.println("O computador venceu!");
+                break;
+            }
+            if (tabuleiroCheio(tabuleiro)) {
+                System.out.println("O jogo empatou!");
+                break;
+            }
+        }
 
         sc.close();
     }
@@ -45,7 +60,6 @@ public class App {
             escolhaUser = sc.next().charAt(0);
             // Convertendo o caracter para maiúsculo
             escolhaUser = Character.toUpperCase(escolhaUser);
-            System.out.println(escolhaUser);
         } while (escolhaUser != 'V' && escolhaUser != 'A');
         return escolhaUser;
     }
@@ -115,5 +129,58 @@ public class App {
 
         mostraJogo(tabuleiro);
     }
-    
+           public boolean verificaVitoria(char[][] tabuleiro, char cor) {
+        
+        // Verifica vitória na horizontal
+        for (int l = 0; l < 6; l++) {
+            for (int c = 0; c < 4; c++) {
+                if (tabuleiro[c][l] == cor && tabuleiro[c + 1][l] == cor && tabuleiro[c + 2][l] == cor
+                        && tabuleiro[c + 3][l] == cor) {
+                    return true;
+                }
+            }
+        }
+
+        // Verifica vitória na vertical
+        for (int c = 0; c < 7; c++) {
+            for (int l = 0; l < 3; l++) {
+                if (tabuleiro[c][l] == cor && tabuleiro[c][l + 1] == cor && tabuleiro[c][l + 2] == cor
+                        && tabuleiro[c][l + 3] == cor) {
+                    return true;
+                }
+            }
+        }
+
+        // Verifica vitória na diagonal descendente
+        for (int c = 0; c < 4; c++) {
+            for (int l = 0; l < 3; l++) {
+                if (tabuleiro[c][l] == cor && tabuleiro[c + 1][l + 1] == cor && tabuleiro[c + 2][l + 2] == cor
+                        && tabuleiro[c + 3][l + 3] == cor) {
+                    return true;
+                }
+            }
+        }
+
+        // Verifica vitória na diagonal ascendente
+        for (int c = 0; c < 4; c++) {
+            for (int l = 3; l < 6; l++) {
+                if (tabuleiro[c][l] == cor && tabuleiro[c + 1][l - 1] == cor && tabuleiro[c + 2][l - 2] == cor
+                        && tabuleiro[c + 3][l - 3] == cor) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean tabuleiroCheio(char[][] tabuleiro) {
+        for (int c = 0; c < 7; c++) {
+            if (tabuleiro[c][0] == 'B') {
+                return false;
+            }
+        }
+        return true;
+    }
 }
+        
